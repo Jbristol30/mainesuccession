@@ -1,0 +1,786 @@
+<title>Maine Succession Partners</title>
+<style>
+  :root {
+    --bg: #f6f3ea;
+    --surface: #efeadd;
+    --ink: #22271f;
+    --muted: #5d6156;
+    --green: #1f4030;
+    --green-strong: #163123;
+    --green-soft: #2e5842;
+    --line: rgba(34, 39, 31, 0.18);
+    --line-soft: rgba(34, 39, 31, 0.10);
+    --box-a: #e6ecdb;   /* pale forest tint: seller / equity boxes */
+    --box-b: #dde6d2;   /* deeper forest tint: cash / newco boxes */
+    --box-n: #eae8e0;   /* granite tint: lenders / neutral boxes */
+    --btn-ink: #f6f3ea;
+    --arrow: #1f4030;
+    --arrow-2: #83887a;
+    --band-bg: #1f4030;
+    --band-ink: #f2efe4;
+    --band-muted: #c4d1c2;
+    --band-line: rgba(242, 239, 228, 0.25);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161a16;
+      --surface: #1d231d;
+      --ink: #e9e6d9;
+      --muted: #a6ab9b;
+      --green: #8db89c;
+      --green-strong: #a8cdb4;
+      --green-soft: #7aa88a;
+      --line: rgba(233, 230, 217, 0.22);
+      --line-soft: rgba(233, 230, 217, 0.10);
+      --box-a: #212b21;
+      --box-b: #24301f;
+      --box-n: #232722;
+      --btn-ink: #131712;
+      --arrow: #8db89c;
+      --arrow-2: #6f7566;
+      --band-bg: #1a3628;
+      --band-ink: #f2efe4;
+      --band-muted: #b9c9b7;
+      --band-line: rgba(242, 239, 228, 0.22);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #161a16;
+    --surface: #1d231d;
+    --ink: #e9e6d9;
+    --muted: #a6ab9b;
+    --green: #8db89c;
+    --green-strong: #a8cdb4;
+    --green-soft: #7aa88a;
+    --line: rgba(233, 230, 217, 0.22);
+    --line-soft: rgba(233, 230, 217, 0.10);
+    --box-a: #212b21;
+    --box-b: #24301f;
+    --box-n: #232722;
+    --btn-ink: #131712;
+    --arrow: #8db89c;
+    --arrow-2: #6f7566;
+    --band-bg: #1a3628;
+    --band-ink: #f2efe4;
+    --band-muted: #b9c9b7;
+    --band-line: rgba(242, 239, 228, 0.22);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Seravek", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.5em;
+    text-wrap: balance;
+  }
+  h1 { font-size: clamp(46px, 7.5vw, 92px); }
+  h2 { font-size: clamp(32px, 5vw, 54px); }
+  h3 { font-size: 22px; }
+  p { margin: 0 0 1em; }
+  a { color: var(--green); text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow {
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 16px; font-weight: 700;
+  }
+  .lede { font-size: 21px; max-width: 58ch; color: var(--muted); }
+  section { padding: 84px 0; }
+  .hairline { border-top: 1px solid var(--line-soft); }
+
+  /* nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+  .brand {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: 19px; font-weight: 700; color: var(--ink);
+    text-decoration: none; margin-right: auto;
+  }
+  .brand span { color: var(--green); }
+  .nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
+  .nav-links a { color: var(--ink); text-decoration: none; font-size: 15px; }
+  .nav-links a:hover { color: var(--green); text-decoration: underline; }
+
+  /* buttons */
+  .btn {
+    display: inline-block; text-decoration: none; cursor: pointer;
+    font: 600 16px/1.2 "Seravek", "Segoe UI", system-ui, sans-serif;
+    padding: 15px 26px; border: 1px solid var(--green);
+  }
+  .btn-primary { background: var(--green); color: var(--btn-ink); }
+  .btn-primary:hover { background: var(--green-soft); border-color: var(--green-soft); }
+  .btn-ghost { background: transparent; color: var(--green); }
+  .btn-ghost:hover { background: var(--box-a); }
+  .btn-band { border-color: var(--band-ink); background: var(--band-ink); color: var(--band-bg); }
+  .btn-band:hover { background: transparent; color: var(--band-ink); }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+
+  /* hero */
+  .hero { padding: 110px 0 96px; position: relative; overflow: hidden; }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero .rule { width: 72px; height: 5px; background: var(--green); margin-bottom: 30px; }
+  .hero .lede { font-size: 22px; }
+
+  /* hero building (stylized Portland skyline office) */
+  .hero-bldg {
+    position: absolute; right: -12px; bottom: -2px;
+    height: 103%; width: auto; z-index: 0; pointer-events: none;
+    -webkit-mask-image: linear-gradient(to left, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to left, #000 72%, transparent 100%);
+  }
+  @media (max-width: 920px) { .hero-bldg { opacity: 0.35; } }
+  .b-mass  { fill: color-mix(in srgb, var(--green) 16%, var(--bg)); }
+  .b-massd { fill: color-mix(in srgb, var(--green) 27%, var(--bg)); }
+  .b-mass2 { fill: color-mix(in srgb, var(--green) 9%, var(--bg)); }
+  .b-win   { fill: color-mix(in srgb, var(--green) 34%, var(--bg)); }
+  .b-mull  { stroke: color-mix(in srgb, var(--green) 16%, var(--bg)); stroke-width: 2; }
+  .b-frame { stroke: color-mix(in srgb, var(--green) 42%, var(--bg)); stroke-width: 2.5; fill: none; }
+  .b-sign {
+    fill: color-mix(in srgb, var(--green) 60%, var(--bg));
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-weight: 600; letter-spacing: 0.14em;
+  }
+
+  /* statement band */
+  .band { background: var(--band-bg); color: var(--band-ink); }
+  .band .eyebrow { color: var(--band-muted); }
+  .band h2 { color: var(--band-ink); }
+  .band p { color: var(--band-muted); }
+  .band strong { color: var(--band-ink); }
+  .big-stat {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-weight: 600; line-height: 0.9; letter-spacing: -0.02em;
+    font-size: clamp(96px, 16vw, 210px); color: var(--band-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-grid {
+    display: grid; grid-template-columns: auto 1fr; gap: 24px 56px;
+    align-items: end;
+  }
+  .stat-grid .copy { max-width: 56ch; padding-bottom: 10px; }
+  .stat-grid .copy p { font-size: 18px; }
+  @media (max-width: 860px) { .stat-grid { grid-template-columns: 1fr; align-items: start; } }
+  .stat-label {
+    font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--band-muted); font-weight: 700; margin-top: 10px;
+  }
+
+  /* cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px; margin-top: 44px; }
+  .card {
+    border: 1px solid var(--line); background: var(--surface);
+    padding: 30px 28px 24px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .card .kicker {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: 40px; line-height: 1; color: var(--green); font-weight: 600;
+  }
+  .card h3 { margin: 6px 0 2px; font-size: 24px; }
+  .card p { color: var(--muted); font-size: 15.5px; margin: 0; }
+  .card .note { margin-top: auto; padding-top: 16px; font-size: 14px; color: var(--ink); font-style: italic; }
+
+  /* financing strip */
+  .fin-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 56px 0; }
+  .fin-chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .chip {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: 19px; font-weight: 600; color: var(--green-strong);
+    border: 1px solid var(--line); background: var(--surface);
+    padding: 12px 22px;
+  }
+
+  /* track record */
+  .proof-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; margin-top: 44px; }
+  .proof {
+    border: 1px solid var(--band-line); padding: 28px 26px 24px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .proof .fig {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: clamp(34px, 4vw, 46px); font-weight: 600; line-height: 1;
+    color: var(--band-ink); font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+  }
+  .proof .tag { font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--band-muted); font-weight: 700; }
+  .proof p { font-size: 15px; margin: 0; }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0; margin-top: 44px; border: 1px solid var(--line); }
+  .step { padding: 30px 28px; border-top: 1px solid var(--line); }
+  @media (min-width: 840px) {
+    .steps .step { border-top: none; }
+    .step + .step { border-left: 1px solid var(--line); }
+  }
+  .steps .step:first-child { border-top: none; }
+  .step .num {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: 38px; color: var(--green); line-height: 1;
+  }
+  .step h3 { margin-top: 12px; }
+  .step p { color: var(--muted); font-size: 15.5px; margin-bottom: 0; }
+
+  /* merger diagram */
+  .diagram-scroll {
+    overflow-x: auto; border: 1px solid var(--line);
+    background: var(--bg); margin-top: 44px;
+  }
+  .diagram-hint { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .dg { position: relative; width: 1400px; height: 1090px; font-size: 13.5px; line-height: 1.42; }
+  .dg svg { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+  .dg .flow-solid { fill: none; stroke: var(--arrow); stroke-width: 1.6; }
+  .dg .flow-dash { fill: none; stroke: var(--arrow-2); stroke-width: 1.6; stroke-dasharray: 7 5; }
+  .dg .ah-solid { fill: var(--arrow); }
+  .dg .ah-dash { fill: var(--arrow-2); }
+  .dg-title {
+    position: absolute; left: 44px; top: 26px; margin: 0; width: 1312px;
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: 25px; font-weight: 600; line-height: 1.15;
+    color: var(--green-strong); white-space: nowrap;
+  }
+  .dg-sub {
+    position: absolute; left: 46px; top: 66px;
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+  }
+  .dbox { position: absolute; z-index: 2; padding: 8px 10px; border: 1px solid var(--line); }
+  .dbox.a { background: var(--box-a); }
+  .dbox.b { background: var(--box-b); }
+  .dbox.n { background: var(--box-n); }
+  .dbox h4 {
+    margin: 0; font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-weight: 600; font-size: 16px; text-align: center; color: var(--green-strong);
+  }
+  .dbox .small-h { font-size: 14px; text-align: left; }
+  .dbox .u { text-decoration: underline; text-underline-offset: 3px; }
+  .drows { display: grid; gap: 2px; margin-top: 9px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .drow { display: flex; justify-content: space-between; gap: 12px; }
+  .drow.dim { color: var(--muted); }
+  .drow.sum-line { border-bottom: 1px solid var(--green); padding-bottom: 2px; }
+  .drow.total { padding-top: 2px; }
+  .dnote { margin-top: 11px; font-size: 12.5px; font-style: italic; text-align: center; color: var(--muted); text-wrap: pretty; }
+  .dval { font-weight: 700; }
+  .flow-label {
+    position: absolute; z-index: 3; font-weight: 600; font-size: 13px;
+    color: var(--green-strong); background: var(--bg); padding: 0 4px;
+  }
+  .lender-frame {
+    position: absolute; left: 45px; top: 790px; width: 640px; height: 100px;
+    border: 1.5px dashed var(--arrow-2); z-index: 2;
+  }
+  .dg-footnote {
+    position: absolute; left: 45px; top: 985px; width: 1320px;
+    display: flex; gap: 14px; align-items: flex-start; z-index: 2;
+  }
+  .dg-footnote .stamp {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--green-strong); border: 1px solid var(--line);
+    padding: 4px 10px; white-space: nowrap;
+  }
+  .dg-footnote .txt { font-size: 12.5px; color: var(--muted); text-wrap: pretty; }
+  .proceeds-head { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .proceeds-line {
+    display: flex; justify-content: space-between; gap: 12px; font-weight: 600;
+    font-variant-numeric: tabular-nums; border-top: 1px solid var(--green);
+    margin-top: 4px; padding-top: 3px;
+  }
+
+  /* form */
+  form { max-width: 560px; margin-top: 36px; display: grid; gap: 18px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .field input, .field select {
+    width: 100%; padding: 12px 12px; font: inherit; font-size: 16px;
+    color: var(--ink); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 0;
+  }
+  .field input:focus-visible, .field select:focus-visible { border-color: var(--green); outline-offset: 0; }
+  .form-note { font-size: 14px; color: var(--muted); margin: 0; }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 40px 0 56px;
+    color: var(--muted); font-size: 14.5px;
+  }
+  footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+</style>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#top">Maine <span>Succession</span> Partners</a>
+    <div class="nav-links">
+      <a href="#opportunity">The Opportunity</a>
+      <a href="#services">What We Do</a>
+      <a href="#mergers">Mergers</a>
+      <a href="#record">Track Record</a>
+      <a href="#worth">What's My Business Worth?</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <svg class="hero-bldg" viewBox="0 0 480 640" aria-hidden="true">
+    <rect x="0" y="310" width="92" height="330" class="b-mass2"></rect>
+    <rect x="8" y="326" width="76" height="314" fill="url(#winp)" opacity="0.45"></rect>
+    <rect x="390" y="366" width="90" height="274" class="b-mass2"></rect>
+    <rect x="398" y="382" width="74" height="258" fill="url(#winp)" opacity="0.45"></rect>
+    <defs>
+      <pattern id="winp" x="132" y="146" width="36" height="46" patternUnits="userSpaceOnUse">
+        <rect x="7" y="9" width="22" height="30" class="b-win"></rect>
+        <line x1="18" y1="9" x2="18" y2="39" class="b-mull"></line>
+        <line x1="7" y1="24" x2="29" y2="24" class="b-mull"></line>
+      </pattern>
+    </defs>
+    <rect x="152" y="72" width="6" height="26" class="b-massd"></rect>
+    <rect x="322" y="72" width="6" height="26" class="b-massd"></rect>
+    <rect x="130" y="6" width="220" height="68" class="b-frame"></rect>
+    <line x1="130" y1="40" x2="350" y2="40" class="b-mull"></line>
+    <text x="240" y="31" text-anchor="middle" font-size="19" class="b-sign">MAINE SUCCESSION</text>
+    <text x="240" y="63" text-anchor="middle" font-size="19" class="b-sign">PARTNERS</text>
+    <rect x="104" y="98" width="272" height="18" class="b-mass"></rect>
+    <rect x="112" y="116" width="256" height="14" class="b-massd"></rect>
+    <rect x="116" y="130" width="248" height="390" class="b-mass"></rect>
+    <rect x="132" y="146" width="216" height="368" fill="url(#winp)"></rect>
+    <rect x="112" y="190" width="256" height="6" class="b-massd"></rect>
+    <rect x="104" y="520" width="272" height="10" class="b-massd"></rect>
+    <rect x="100" y="530" width="280" height="110" class="b-mass"></rect>
+    <rect x="118" y="548" width="40" height="80" class="b-win"></rect>
+    <rect x="170" y="548" width="40" height="80" class="b-win"></rect>
+    <rect x="222" y="548" width="36" height="80" class="b-massd"></rect>
+    <rect x="270" y="548" width="40" height="80" class="b-win"></rect>
+    <rect x="322" y="548" width="40" height="80" class="b-win"></rect>
+  </svg>
+  <div class="wrap">
+    <div class="rule"></div>
+    <div class="eyebrow">Sell-side M&amp;A advisory for Maine's trades &amp; service businesses</div>
+    <h1>Your life's work deserves a real exit.</h1>
+    <p class="lede">You spent decades earning your reputation, your customers, and your crew's trust. When it's time to step back, you deserve a buyer who pays what all of that is worth, and a partner who does the heavy lifting for you.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#worth">Get a confidential valuation conversation</a>
+      <a class="btn btn-ghost" href="#services">See what we'd do for you</a>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="opportunity">
+  <div class="wrap">
+    <div class="eyebrow">The opportunity</div>
+    <div class="stat-grid">
+      <div>
+        <div class="big-stat">44.8</div>
+        <div class="stat-label">Median age. Maine is the oldest state in America.</div>
+      </div>
+      <div class="copy">
+        <p><strong>That is not a problem. That is your moment.</strong></p>
+        <p>Nowhere else are more good businesses reaching retirement at once. And here is the good news for you: a new generation of entrepreneurs, backed by Boston and New York finance and search funds, is competing to buy exactly what you have already built.</p>
+        <p>We make the introduction. We pass the torch to the next generation. <strong>And you get paid for the fire you lit.</strong></p>
+        <div class="cta-row">
+          <a class="btn btn-band" href="#worth">Find out what your torch is worth</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="eyebrow">What we do</div>
+    <h2>Everything we do answers one question: what puts the most in your pocket?</h2>
+    <p class="lede">Your timeline. Your terms. Your name still worth something in town when it's done.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="kicker">01</div>
+        <h3>Know your number</h3>
+        <p>Before you decide anything, you deserve a straight answer: what your business is worth today, what is quietly holding its value down, and a 12-month plan to fix it. Most owners are surprised, usually in a good way.</p>
+        <div class="note">Free of charge, no strings attached.</div>
+      </div>
+      <div class="card">
+        <div class="kicker">02</div>
+        <h3>Become the business buyers fight over</h3>
+        <p>We bolster your performance, your balance sheet, and your business processes. Then we connect enhanced data transparency systems that give buyers a looking glass into your performance. When buyers see clearly, they bid confidently, and confidence pays premiums.</p>
+        <div class="note">Offered standalone or as part of your exit plan.</div>
+      </div>
+      <div class="card">
+        <div class="kicker">03</div>
+        <h3>The right buyer, not the first buyer</h3>
+        <p>We run a confidential process and bring curated buyers to your table: Boston- and NYC-based search funds, SBA-backed operators, strategic acquirers, private equity. You keep running the business; we negotiate like it's our own retirement on the line.</p>
+        <div class="note">Success fee paid at closing from seller proceeds. We only win when you do.</div>
+      </div>
+      <div class="card">
+        <div class="kicker">04</div>
+        <h3>Stronger together: mergers</h3>
+        <p>Sometimes the smartest exit is joining forces with the shop across the county. We structure the whole combination: valuation of each side, rolled equity, assumed debt, bank financing, and a clean capitalization at close.</p>
+        <div class="note">See a real deal structure below.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="fin-strip">
+  <div class="wrap">
+    <div class="eyebrow">Financing</div>
+    <h2 style="font-size:clamp(26px,3.5vw,38px)">Whatever road gets you paid, we have driven it.</h2>
+    <p class="lede" style="font-size:18px">We explore every financing strategy until the money is real and the closing is on the calendar.</p>
+    <div class="fin-chips">
+      <div class="chip">SBA</div>
+      <div class="chip">Search Fund</div>
+      <div class="chip">Private Equity</div>
+      <div class="chip">Institutional Capital</div>
+      <div class="chip">Conventional Commercial Mortgage</div>
+    </div>
+  </div>
+</div>
+
+<section id="mergers">
+  <div class="wrap">
+    <div class="eyebrow">Merger facilitation</div>
+    <h2>What a facilitated merger actually looks like</h2>
+    <p class="lede">Two owners, one stronger company. Below is the sources-and-uses structure of a merger we model for clients: two Aroostook County septic businesses combined into a single platform, with one family fully bought out, the other rolling equity into the new company, and bank financing sized to close.</p>
+
+    <div class="diagram-scroll">
+      <div class="dg">
+        <svg width="1400" height="1090" viewBox="0 0 1400 1090">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="ah-solid" d="M0,1 L9,5 L0,9 z"></path>
+            </marker>
+            <marker id="ahd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="ah-dash" d="M0,1 L9,5 L0,9 z"></path>
+            </marker>
+          </defs>
+          <g class="flow-solid" marker-end="url(#ah)">
+            <path d="M140,250 V212 H117 V184"></path>
+            <path d="M215,250 V212 H277 V184"></path>
+            <path d="M290,250 V212 H437 V184"></path>
+            <path d="M400,360 H428 V470 H452"></path>
+            <path d="M400,600 H428 V500 H452"></path>
+            <path d="M400,640 H720 V284 H752"></path>
+            <path d="M685,480 H752"></path>
+            <path d="M685,844 H752"></path>
+            <path d="M1025,881 H1350 V558"></path>
+          </g>
+          <g class="flow-dash" marker-end="url(#ahd)">
+            <path d="M400,292 L746,198"></path>
+            <path d="M360,505 L742,214"></path>
+            <path d="M1025,167 H1230 V342"></path>
+            <path d="M1025,728 H1300 V558"></path>
+            <path d="M1088,470 H1028"></path>
+          </g>
+        </svg>
+
+        <h3 class="dg-title">Presque Isle Septic and Fort Kent Pumping are combined into Pine Tree Sanitation Group</h3>
+        <div class="dg-sub">Aroostook County, Maine &nbsp;·&nbsp; Sources &amp; uses at close &nbsp;·&nbsp; $ in millions</div>
+
+        <div class="dbox a" style="left:45px;top:120px;width:145px;height:62px">
+          <h4 class="small-h u">Thibodeau Family:</h4>
+          <div class="dval">$1.42mm</div>
+        </div>
+        <div class="dbox a" style="left:205px;top:120px;width:145px;height:62px">
+          <h4 class="small-h u">Boulder Ridge Cap.:</h4>
+          <div class="dval">$0.28mm</div>
+        </div>
+        <div class="dbox a" style="left:365px;top:120px;width:145px;height:62px">
+          <h4 class="small-h u">Katahdin Ave Ptrs:</h4>
+          <div class="dval">$0.15mm</div>
+        </div>
+
+        <div style="position:absolute;left:540px;top:126px;width:200px;z-index:2">
+          <div class="proceeds-head">Presque Isle proceeds</div>
+          <div class="proceeds-line"><span>Total to holders</span><span>$1.85mm</span></div>
+        </div>
+
+        <div class="dbox a" style="left:70px;top:250px;width:330px;height:234px;padding:12px 16px">
+          <h4 style="font-size:19px">Presque Isle Septic Service</h4>
+          <div class="drows">
+            <div class="drow"><span>Cash Consideration</span><span>$1.85mm</span></div>
+            <div class="drow"><span>Assumed Debt</span><span>$0.25mm</span></div>
+            <div class="drow dim"><span>Less Current Assets</span><span>$0.12mm</span></div>
+            <div class="drow sum-line"><span>Plus Trans. Costs</span><span>$0.09mm</span></div>
+            <div class="drow total"><span>BS Basis of FA</span><span>$2.07mm</span></div>
+          </div>
+          <div class="dnote">Owned by: Thibodeau family and Boulder Ridge Capital (being bought out pursuant to the Presque Isle MIPA), and principals Dale and Renée Thibodeau</div>
+        </div>
+
+        <div class="dbox n" style="left:70px;top:505px;width:330px;height:235px;padding:12px 16px">
+          <h4 style="font-size:19px">Fort Kent Pumping &amp; Septic</h4>
+          <div class="drows">
+            <div class="drow"><span>Cash Consideration</span><span>$0.95mm</span></div>
+            <div class="drow"><span>Assumed Debt</span><span>$0.18mm</span></div>
+            <div class="drow"><span>Rolled Equity</span><span>$0.40mm</span></div>
+            <div class="drow dim"><span>Less Current Assets</span><span>$0.07mm</span></div>
+            <div class="drow sum-line"><span>Plus Trans. Costs</span><span>$0.05mm</span></div>
+            <div class="drow total"><span>BS Basis of FA</span><span>$1.51mm</span></div>
+          </div>
+          <div class="dnote">Owned by: Cyr Brothers Holdings, and principals Marc Cyr and Luc Cyr (rolling 30% of proceeds)</div>
+        </div>
+
+        <div class="dbox n" style="left:455px;top:440px;width:230px;height:128px;padding:10px 14px">
+          <h4>Asset Project Companies</h4>
+          <div class="drows" style="margin-top:10px">
+            <div class="drow"><span>Presque Isle FA</span><span>$2.07mm</span></div>
+            <div class="drow sum-line"><span>Fort Kent FA</span><span>$1.51mm</span></div>
+            <div class="drow total"><span>Total Fixed Assets</span><span>$3.58mm</span></div>
+          </div>
+        </div>
+
+        <div class="dbox b" style="left:755px;top:120px;width:270px;height:120px;padding:10px 14px">
+          <h4>Current Assets</h4>
+          <div class="drows" style="margin-top:8px">
+            <div class="drow"><span>Cash</span><span>$0.11mm</span></div>
+            <div class="drow sum-line"><span>Net AR/AP</span><span>$0.08mm</span></div>
+            <div class="drow total"><span>Total Current Assets</span><span>$0.19mm</span></div>
+          </div>
+        </div>
+
+        <div class="dbox a" style="left:755px;top:245px;width:270px;height:78px;padding:10px 14px">
+          <h4>Cyr Converted Equity</h4>
+          <div class="drow" style="margin-top:8px;font-weight:600;font-variant-numeric:tabular-nums"><span>Total Converted Equity</span><span>$0.40mm</span></div>
+        </div>
+
+        <div class="dbox n" style="left:755px;top:350px;width:270px;height:288px;padding:10px 14px">
+          <h4>Aroostook Sanitation Borrower*</h4>
+          <div class="dnote" style="margin-top:6px;font-style:normal">All assets of Presque Isle Septic and Fort Kent Pumping</div>
+          <div class="drows" style="margin-top:10px">
+            <div class="drow"><span>Cash</span><span>$0.30mm</span></div>
+            <div class="drow"><span>Net AR/AP</span><span>$0.08mm</span></div>
+            <div class="drow sum-line"><span>Fixed Assets</span><span>$3.58mm</span></div>
+            <div class="drow total"><span>Total Assets</span><span>$3.96mm</span></div>
+          </div>
+          <div class="drows" style="margin-top:14px">
+            <div class="drow"><span>Katahdin Trust Term Loan</span><span>$1.98mm</span></div>
+            <div class="drow"><span>Deere Equipment Loan</span><span>$0.68mm</span></div>
+            <div class="drow sum-line"><span>Equity</span><span>$1.30mm</span></div>
+            <div class="drow total"><span>Total Liabilities &amp; Eq</span><span>$3.96mm</span></div>
+          </div>
+        </div>
+
+        <div class="dbox b" style="left:755px;top:658px;width:270px;height:156px;padding:10px 14px">
+          <h4>New Cash Contributions</h4>
+          <div class="drows" style="margin-top:8px">
+            <div class="drow"><span>Boulder Ridge Cash</span><span>$0.85mm</span></div>
+            <div class="drow"><span>Management Cash</span><span>$0.05mm</span></div>
+            <div class="drow"><span>Katahdin Term Loan</span><span>$1.98mm</span></div>
+            <div class="drow sum-line"><span>Deere New Draw</span><span>$0.25mm</span></div>
+            <div class="drow total"><span>Total New Cash</span><span>$3.13mm</span></div>
+          </div>
+        </div>
+
+        <div class="dbox a" style="left:755px;top:818px;width:270px;height:142px;padding:10px 14px">
+          <h4>Rolled Contributions</h4>
+          <div class="drows" style="margin-top:8px">
+            <div class="drow"><span>Cyr Rolled Equity</span><span>$0.40mm</span></div>
+            <div class="drow sum-line"><span>Assumed Equipment Debt</span><span>$0.43mm</span></div>
+            <div class="drow total"><span>Total Rolled / Assumed</span><span>$0.83mm</span></div>
+          </div>
+        </div>
+
+        <div class="dbox b" style="left:1090px;top:345px;width:280px;height:232px;padding:12px 16px">
+          <h4 style="font-size:19px">Pine Tree Sanitation Group</h4>
+          <div class="drows" style="margin-top:12px;gap:3px">
+            <div class="drow dim"><span>Katahdin Trust Term Loan</span><span>$1.98mm</span></div>
+            <div class="drow dim"><span>Deere Equipment Loan</span><span>$0.68mm</span></div>
+            <div class="drow"><span>Boulder Ridge Equity</span><span>$0.85mm</span></div>
+            <div class="drow"><span>Management Equity</span><span>$0.05mm</span></div>
+            <div class="drow sum-line"><span>Cyr Rolled Equity</span><span>$0.40mm</span></div>
+            <div class="drow total"><span>Total Capitalization</span><span>$3.96mm</span></div>
+          </div>
+          <div class="dnote" style="margin-top:6px;font-size:12px;text-align:left">*Debt $2.66mm / Equity $1.30mm</div>
+        </div>
+
+        <div class="lender-frame"></div>
+        <div class="dbox n" style="left:60px;top:808px;width:145px;height:64px">
+          <h4 class="small-h">Katahdin Trust:</h4>
+          <div class="dval">$1.98mm</div>
+        </div>
+        <div class="dbox n" style="left:215px;top:808px;width:145px;height:64px">
+          <h4 class="small-h">Deere Financial:</h4>
+          <div class="dval">$0.68mm</div>
+        </div>
+        <div class="dbox n" style="left:370px;top:808px;width:145px;height:64px">
+          <h4 class="small-h">Boulder Ridge:</h4>
+          <div class="dval">$0.85mm</div>
+        </div>
+        <div class="dbox n" style="left:525px;top:808px;width:145px;height:64px">
+          <h4 class="small-h">Management:</h4>
+          <div class="dval">$0.05mm</div>
+        </div>
+
+        <div class="flow-label" style="left:520px;top:232px">$0.12mm</div>
+        <div class="flow-label" style="left:600px;top:318px">$0.07mm</div>
+        <div class="flow-label" style="left:690px;top:455px">$3.58mm</div>
+        <div class="flow-label" style="left:1032px;top:444px">$0.19mm</div>
+        <div class="flow-label" style="left:600px;top:614px">$0.40mm</div>
+
+        <div class="dg-footnote">
+          <div class="stamp">Aroostook Sanitation</div>
+          <div class="txt">*Borrower cash of $0.30mm = $0.11mm delivered by the two targets plus $0.19mm funded by Pine Tree Sanitation Group. Cash uses of $3.13mm (Presque Isle $1.85mm, Fort Kent $0.95mm, transaction costs $0.14mm, cash to balance sheet $0.19mm) are funded by the $3.13mm of new cash shown. Total capitalization of $3.96mm = debt of $2.66mm (Katahdin Trust term loan $1.98mm; Deere equipment loan $0.68mm, incl. $0.43mm of assumed debt) and equity of $1.30mm (Boulder Ridge $0.85mm, Cyr rolled $0.40mm, management $0.05mm). Consideration reflects 4 pump trucks, 2 vac tankers and the Caribou yard at Presque Isle, and 2 pump trucks plus the Fort Kent transfer site.</div>
+        </div>
+      </div>
+    </div>
+    <p class="diagram-hint">Scroll sideways to see the full structure. Every dollar is accounted for; that's the point.</p>
+  </div>
+</section>
+
+<section class="band" id="record">
+  <div class="wrap">
+    <div class="eyebrow">Track record</div>
+    <h2>Entrepreneurs for entrepreneurs.</h2>
+    <p style="max-width:62ch;font-size:18px">Why trust us with your life's work? Because our founder, <strong>Justin Bristol</strong>, is an entrepreneur himself. He has spent his career doing exactly what we will do for you: finding overlooked value, building the systems that prove it, and turning it into real money.</p>
+
+    <div class="proof-grid">
+      <div class="proof">
+        <div class="tag">From borrowed power tools</div>
+        <div class="fig">$250K</div>
+        <p>Started his first company in a college backyard with borrowed power tools, building solar-powered food carts. Scaled it to $250K in sales, serving JetBlue at the Boston Marathon, MetLife, and MullenLowe.</p>
+      </div>
+      <div class="proof">
+        <div class="tag">Hydropower platform growth</div>
+        <div class="fig">$5MM &rarr; $100MM</div>
+        <p>Second employee at a hydropower firm that grew from $5MM to $100MM in valuation. Built the board-level financial reporting and performance transparency systems that institutional investors relied on.</p>
+      </div>
+      <div class="proof">
+        <div class="tag">Distressed mill, reborn</div>
+        <div class="fig">QOZ Engine</div>
+        <p>Found a significantly asymmetrical, distressed, abandoned mill property and turned it into a Qualified Opportunity Zone Fund engine that harbors capital gains tax and appreciation. Today it houses an industrial art studio and an industrial outdoor storage operation, fully leased.</p>
+      </div>
+      <div class="proof">
+        <div class="tag">Abandoned hydro, revived</div>
+        <div class="fig">$4.5&ndash;6MM</div>
+        <p>Found an abandoned hydroelectric power station in the Providence, RI metro area and raised over $250K of equity for its licensing costs, in anticipation of it becoming a $4.5MM to $6MM asset.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:36px;font-size:16px">The full r&eacute;sum&eacute; is yours for the asking. We like showing our work.</p>
+    <div class="cta-row" style="margin-top:12px">
+      <a class="btn btn-band" href="#worth">Put that experience to work for you</a>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="hairline">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2>Three steps from "someday" to sold</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Talk, confidentially</h3>
+        <p>A no-obligation valuation conversation. We learn your business (crews, trucks, backlog, licensing) and give you a straight read on what it's worth and what would make it worth more.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Get exit-ready</h3>
+        <p>We find the deal-killers before a buyer does, strengthen your numbers and processes, and wire in the data transparency that makes buyers comfortable paying full price. You stay in control of the timeline.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Go to market &amp; close</h3>
+        <p>We run a confidential process with curated buyers, negotiate on your behalf, and manage the deal to a real closing, exploring every financing road until the money is in your hands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="worth" class="hairline">
+  <div class="wrap">
+    <div class="eyebrow">What's my business worth?</div>
+    <h2>Find out, confidentially</h2>
+    <p class="lede">Tell us a little about your business and we'll set up a confidential valuation conversation. No obligation, no pressure, and nobody hears about it but us.</p>
+    <form id="intake">
+      <div class="field">
+        <label for="f-name">Your name</label>
+        <input id="f-name" name="name" type="text" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="f-type">Business type</label>
+        <select id="f-type" name="type" required>
+          <option value="" selected disabled>Choose one…</option>
+          <option>HVAC</option>
+          <option>Plumbing</option>
+          <option>Electrical</option>
+          <option>Roofing</option>
+          <option>Painting</option>
+          <option>Septic / Pumping</option>
+          <option>Other trades or service business</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-rev">Annual revenue range</label>
+        <select id="f-rev" name="revenue" required>
+          <option value="" selected disabled>Choose one…</option>
+          <option>Under $1M</option>
+          <option>$1M – $3M</option>
+          <option>$3M – $6M</option>
+          <option>Over $6M</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-time">Timeline to exit</label>
+        <select id="f-time" name="timeline" required>
+          <option value="" selected disabled>Choose one…</option>
+          <option>Within 12 months</option>
+          <option>1 – 3 years</option>
+          <option>3 – 5 years</option>
+          <option>Just exploring</option>
+        </select>
+      </div>
+      <div>
+        <button class="btn btn-primary" type="submit">Get a confidential valuation conversation</button>
+      </div>
+      <p class="form-note">Submitting opens an email to us with your answers; nothing is stored on this page.</p>
+    </form>
+  </div>
+</section>
+
+<section id="contact" class="hairline">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h2>Talk to us first, decide later</h2>
+    <p style="max-width:65ch">The first conversation is free and confidential. Even if you're five years out, knowing your number now changes what you do next year.</p>
+    <p><a href="mailto:justin@mainesuccession.com"><strong>justin@mainesuccession.com</strong></a> &nbsp;·&nbsp; <a href="tel:+14017936041"><strong>401-793-6041</strong></a></p>
+    <p style="color:var(--muted)">Maine Succession Partners · Proudly Maine-based</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="yr">2026</span> Maine Succession Partners</div>
+    <div>Confidential by default. Success fee paid only at closing.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  document.getElementById('intake').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target;
+    var body =
+      'Name: ' + f.name.value + '\n' +
+      'Business type: ' + f.type.value + '\n' +
+      'Annual revenue: ' + f.revenue.value + '\n' +
+      'Timeline: ' + f.timeline.value + '\n\n' +
+      'Requesting a confidential valuation conversation.';
+    location.href = 'mailto:justin@mainesuccession.com'
+      + '?subject=' + encodeURIComponent('Confidential valuation conversation: ' + f.name.value)
+      + '&body=' + encodeURIComponent(body);
+  });
+</script>
