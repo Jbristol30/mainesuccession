@@ -185,6 +185,20 @@
     color: var(--band-muted); font-weight: 700; margin-top: 10px;
   }
 
+  /* white pine in the Opportunity band: base at the band's bottom edge,
+     crown level with the top of the "Maine is the oldest state" paragraph */
+  #opportunity { position: relative; overflow: hidden; }
+  #opportunity .wrap { position: relative; z-index: 1; }
+  .pine {
+    position: absolute; z-index: 0; pointer-events: none;
+    left: max(12px, calc(50% - 560px));
+    top: 164px; bottom: 0; width: 420px;
+  }
+  .p1 { fill: color-mix(in srgb, var(--band-ink) 34%, var(--band-bg)); }
+  .p2 { fill: color-mix(in srgb, var(--band-ink) 47%, var(--band-bg)); }
+  .pt { fill: color-mix(in srgb, var(--band-ink) 54%, var(--band-bg)); }
+  .pc { fill: color-mix(in srgb, var(--band-ink) 64%, var(--band-bg)); }
+
   /* cards */
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px; margin-top: 44px; }
   .card {
@@ -371,7 +385,7 @@
   <div class="wrap">
     <div class="rule"></div>
     <div class="eyebrow">Sell-side M&amp;A advisory for Maine's trades &amp; service businesses</div>
-    <h1>Your life's work deserves a real exit.</h1>
+    <h1>Linking retiring business owners in Maine to Boston and NYC finance.</h1>
     <p class="lede">You spent decades earning your reputation, your customers, and your crew's trust. When it's time to step back, you deserve a buyer who pays what all of that is worth, and a partner who does the heavy lifting for you.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#worth">Get a confidential valuation conversation</a>
@@ -381,15 +395,39 @@
 </section>
 
 <section class="band" id="opportunity">
+  <svg class="pine" viewBox="0 0 320 440" preserveAspectRatio="xMinYMax meet" aria-hidden="true">
+    <path class="pt" d="M155,72 L166,440 L144,440 Z"></path>
+    <path class="p1" d="M155,28 L186,96 L124,96 Z"></path>
+    <path class="p2" d="M158,108 L95,120 L158,128 Z"></path>
+    <path class="p1" d="M152,104 L235,116 L152,126 Z"></path>
+    <path class="p1" d="M158,150 L70,166 L158,174 Z"></path>
+    <path class="p2" d="M152,146 L250,162 L152,172 Z"></path>
+    <path class="p2" d="M158,196 L55,214 L158,222 Z"></path>
+    <path class="p1" d="M152,192 L268,210 L152,220 Z"></path>
+    <path class="p1" d="M158,244 L42,264 L158,272 Z"></path>
+    <path class="p2" d="M152,240 L282,262 L152,270 Z"></path>
+    <path class="p2" d="M158,294 L30,318 L158,324 Z"></path>
+    <path class="p1" d="M152,290 L296,314 L152,322 Z"></path>
+    <path class="p1" d="M158,348 L20,374 L158,380 Z"></path>
+    <path class="p2" d="M152,344 L305,372 L152,378 Z"></path>
+    <ellipse class="pc" cx="233" cy="128" rx="5" ry="10"></ellipse>
+    <ellipse class="pc" cx="72" cy="178" rx="5" ry="10"></ellipse>
+    <ellipse class="pc" cx="265" cy="222" rx="5" ry="10"></ellipse>
+    <ellipse class="pc" cx="44" cy="276" rx="5" ry="10"></ellipse>
+    <ellipse class="pc" cx="262" cy="431" rx="6" ry="9"></ellipse>
+    <path class="p1" d="M287,378 L304,412 L270,412 Z"></path>
+    <path class="p2" d="M287,398 L309,432 L265,432 Z"></path>
+    <path class="pt" d="M285,428 L289,440 L281,440 Z"></path>
+  </svg>
   <div class="wrap">
     <div class="eyebrow">The opportunity</div>
     <div class="stat-grid">
-      <div>
+      <div class="stat-col">
         <div class="big-stat">56.6%</div>
         <div class="stat-label">of Maine business owners are 55 or older.</div>
       </div>
       <div class="copy">
-        <p><strong>That is not a problem. That is your moment.</strong></p>
+        <p><strong>It's time they start enjoying the Way Life Should Be.</strong></p>
         <p>Maine is the oldest state in the country, and its business owners run older still: the average Maine owner is about 55, and more than one in four is already 65 or older. Nowhere else are more good businesses reaching retirement at once. And here is the good news for you: a new generation of entrepreneurs, backed by Boston and New York finance and search funds, is competing to buy exactly what you have already built.</p>
         <p>We make the introduction. We pass the torch to the next generation. <strong>And you get paid for the fire you lit.</strong></p>
         <div class="cta-row">
