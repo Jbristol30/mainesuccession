@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Maine Succession Partners: sell-side M&A advisory linking retiring Maine trades-business owners to Boston and NYC finance and search funds. Free valuation conversation.">
 <title>Maine Succession Partners</title>
 <style>
   :root {
@@ -345,7 +351,32 @@
     color: var(--muted); font-size: 14.5px;
   }
   footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+  /* mobile */
+  .diagram-scroll { -webkit-overflow-scrolling: touch; }
+  @media (max-width: 720px) {
+    section { padding: 56px 0; }
+    .hero { padding: 84px 0 60px; }
+    h1 { font-size: 36px; }
+    h2 { font-size: 29px; }
+    .wrap { padding: 0 18px; }
+    .nav-inner { padding: 12px 16px; gap: 8px 14px; }
+    .nav-links { gap: 8px 14px; }
+    .nav-links a { font-size: 13.5px; }
+    .lede, .hero .lede { font-size: 18px; }
+    .cta-row .btn { width: 100%; text-align: center; }
+    .stat-grid { gap: 20px; }
+    .stat-grid .copy { padding-bottom: 0; }
+    .pine { opacity: 0.45; }
+    .chip { font-size: 16px; padding: 10px 16px; }
+    .card { padding: 24px 20px 20px; }
+    .step { padding: 24px 20px; }
+    .proof { padding: 22px 20px 20px; }
+    footer .wrap { flex-direction: column; gap: 8px; }
+  }
 </style>
+</head>
+<body>
 
 <nav>
   <div class="nav-inner">
@@ -1028,3 +1059,5 @@
       + '&body=' + encodeURIComponent(body);
   });
 </script>
+</body>
+</html>
