@@ -130,11 +130,13 @@
   .brand-logo {
     display: block; width: 104px; height: 52px;
     background: var(--logo) left center / contain no-repeat;
+    filter: url(#msp-green);
   }
   .footer-logo {
     display: block; width: 92px; height: 46px;
     background: var(--logo) left center / contain no-repeat;
     margin-bottom: 14px; opacity: 0.85;
+    filter: url(#msp-green);
   }
   .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -401,6 +403,16 @@
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="msp-green" color-interpolation-filters="sRGB">
+    <feComponentTransfer>
+      <feFuncR type="linear" slope="-0.428571" intercept="0.182073"></feFuncR>
+      <feFuncG type="linear" slope="0.714286" intercept="0.066106"></feFuncG>
+      <feFuncB type="linear" slope="0.274194" intercept="0.087160"></feFuncB>
+    </feComponentTransfer>
+  </filter>
+</svg>
 
 <nav>
   <div class="nav-inner">
