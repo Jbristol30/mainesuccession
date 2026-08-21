@@ -1124,7 +1124,7 @@
           <ul>
             <li>Owner earnings (SDE) = net income + your salary and benefits + personal and one-time add-backs, averaged over three years.</li>
             <li>Institutional buyers value earnings after paying a manager to run the company; we assume a $90,000 manager salary.</li>
-            <li>SBA 7(a): 10% rate, 10-year term, 1.25x debt coverage, 10% buyer down payment. SBA rules also let a standby seller note count toward part of that down payment.</li>
+            <li>SBA 7(a): 10% rate, 10-year term, 1.25x debt coverage, 10% buyer down payment, and the program's $5,000,000 maximum loan. SBA rules also let a standby seller note count toward part of that down payment.</li>
             <li>Conventional loan: 8.5% rate, 7-year term, 1.35x coverage, 25% down.</li>
             <li>Maine trades and service companies typically trade at 2.4x to 3.2x owner earnings; family offices at 3.5x to 4.5x and private equity at 4.0x to 5.5x of earnings after a manager.</li>
             <li>Seller-financed sales: 20% cash down, the rest carried by you at 8% over 7 years.</li>
@@ -1236,6 +1236,7 @@
     var REPL = 90000; /* hired manager salary */
     var money = function (n) { return '$' + Math.max(0, Math.round(n / 10000) * 10000).toLocaleString('en-US'); };
     var moneyK = function (n) { return '$' + Math.max(0, Math.round(n / 1000) * 1000).toLocaleString('en-US'); };
+    var rng = function (lo, hi) { return money(lo) === money(hi) ? money(hi) : money(lo) + ' to ' + money(hi); };
     var num = function (id) {
       var v = document.getElementById(id).value.replace(/[^0-9.]/g, '');
       return v ? parseFloat(v) : 0;
@@ -1251,7 +1252,7 @@
     function bankPath(sde, f, cfg) {
       var cfads = sde - REPL;
       if (cfads <= 0) return { blocked: true };
-      var L = loanMax(cfads, cfg.dscr, cfg.rate, cfg.yrs);
+      var L = Math.min(loanMax(cfads, cfg.dscr, cfg.rate, cfg.yrs), cfg.maxLoan || Infinity);
       var p0 = Math.min(cfg.multHigh * sde, L / (1 - cfg.down));
       var pf = Math.min(cfg.multHigh * sde, L / Math.max(0.2, 1 - cfg.down - f));
       var low = Math.min(cfg.multLow * sde, L / (1 - cfg.down));
@@ -1269,7 +1270,7 @@
 
     var PATHS = [
       { id: 'sba', label: 'SBA Lender', kind: 'bank',
-        cfg: { rate: 0.10, yrs: 10, dscr: 1.25, down: 0.10, multLow: 2.4, multHigh: 3.2 },
+        cfg: { rate: 0.10, yrs: 10, dscr: 1.25, down: 0.10, multLow: 2.4, multHigh: 3.2, maxLoan: 5000000 },
         blurb: 'The most common buyer for Maine trades companies: an operator backed by an SBA 7(a) loan. The bank is the real counterparty. It lends what your provable cash flow can repay with room to spare, and the buyer adds at least 10% down.' },
       { id: 'fo', label: 'Family Office', kind: 'mult', gate: 400000,
         cfg: { multLow: 3.5, multHigh: 4.5 },
@@ -1322,7 +1323,7 @@
           html += '<div class="calc-range">Not yet financeable</div>';
           msg = 'At these numbers, average earnings do not yet cover a new owner’s salary plus a loan payment. That is exactly what preparation fixes. It is worth a conversation.';
         } else {
-          html += '<div class="calc-range">' + money(r.low) + ' to ' + money(r.high) + '</div>';
+          html += '<div class="calc-range">' + rng(r.low, r.high) + '</div>';
           seg = [['Bank loan', r.bank, 'sg-bank'], ['Buyer’s cash', r.cash, 'sg-cash'], ['Your note', r.note, 'sg-note']];
           rows += row('Cash to you at close', money(r.cashAtClose));
           if (f > 0) {
@@ -1339,7 +1340,7 @@
         }
       } else if (P.kind === 'mult') {
         var m = multPath(ebitda, f, P.cfg);
-        html += '<div class="calc-range">' + money(m.low) + ' to ' + money(m.high) + '</div>';
+        html += '<div class="calc-range">' + rng(m.low, m.high) + '</div>';
         var V = m.high, note = f * V;
         seg = [['Buyer’s capital', V - note, 'sg-bank'], ['Your note', note, 'sg-note']];
         rows += row('Cash to you at close', money(V - note));
@@ -1350,7 +1351,7 @@
         if (ebitda < P.gate) msg = P.gateMsg;
       } else {
         var lowV = P.cfg.multLow * sde, highV = P.cfg.multHigh * sde;
-        html += '<div class="calc-range">' + money(lowV) + ' to ' + money(highV) + '</div>';
+        html += '<div class="calc-range">' + rng(lowV, highV) + '</div>';
         var Vs = highV, noteS = Vs * (1 - P.cfg.down);
         var pmt = noteS * ((P.cfg.rate / 12) / (1 - Math.pow(1 + P.cfg.rate / 12, -12 * P.cfg.yrs))) * 12;
         seg = [['Cash at close', Vs * P.cfg.down, 'sg-cash'], ['Your note', noteS, 'sg-note']];
