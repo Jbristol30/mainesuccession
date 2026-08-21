@@ -360,6 +360,51 @@
     margin-top: 4px; padding-top: 3px;
   }
 
+  /* value calculator */
+  .calc-grid { display: grid; grid-template-columns: 360px 1fr; gap: 28px; margin-top: 44px; align-items: start; }
+  @media (max-width: 900px) { .calc-grid { grid-template-columns: 1fr; } }
+  .calc-panel { border: 1px solid var(--line); background: var(--surface); padding: 24px; }
+  .calc-panel h3 { font-size: 20px; margin-bottom: 4px; }
+  .calc-hint { font-size: 13.5px; color: var(--muted); margin-bottom: 18px; }
+  .calc-panel .field { margin-bottom: 13px; }
+  .calc-computed { border-top: 1px solid var(--line); margin-top: 4px; padding-top: 14px; display: grid; gap: 7px; font-size: 15px; }
+  .calc-computed div { display: flex; justify-content: space-between; gap: 12px; }
+  .calc-computed .cval { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .paths { display: flex; flex-wrap: wrap; gap: 8px; }
+  .path-btn {
+    font: 600 14px/1.2 "Seravek", "Segoe UI", system-ui, sans-serif;
+    padding: 10px 14px; border: 1px solid var(--line);
+    background: transparent; color: var(--ink); cursor: pointer;
+  }
+  .path-btn.active { background: var(--green); border-color: var(--green); color: var(--btn-ink); }
+  .note-ctl { margin: 18px 0 0; }
+  .note-ctl label { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  .note-ctl input[type="range"] { width: 100%; max-width: 420px; display: block; accent-color: var(--green); margin-top: 8px; }
+  .calc-out { border: 1px solid var(--line); padding: 26px; margin-top: 16px; }
+  .calc-caption { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+  .calc-range {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-weight: 600; font-size: clamp(28px, 3.6vw, 42px);
+    color: var(--green-strong); line-height: 1.12; letter-spacing: -0.01em;
+  }
+  .calc-blurb { color: var(--muted); font-size: 15px; margin: 12px 0 0; }
+  .sbar { display: flex; height: 30px; border: 1px solid var(--line); margin-top: 18px; overflow: hidden; }
+  .sbar div { height: 100%; }
+  .sg-bank { background: var(--green); }
+  .sg-cash { background: color-mix(in srgb, var(--green) 42%, var(--bg)); }
+  .sg-note { background: var(--muted); }
+  .slegend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+  .slegend span { display: inline-flex; align-items: center; gap: 6px; }
+  .slegend i { width: 11px; height: 11px; display: inline-block; }
+  .calc-rows { display: grid; gap: 5px; margin-top: 16px; font-size: 15px; }
+  .calc-rows div { display: flex; justify-content: space-between; gap: 12px; }
+  .calc-rows .cval { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .calc-msg { margin-top: 14px; font-size: 14px; background: var(--box-a); border-left: 3px solid var(--green); padding: 10px 14px; }
+  .calc-assump { margin-top: 20px; font-size: 13.5px; color: var(--muted); }
+  .calc-assump summary { cursor: pointer; font-weight: 600; color: var(--ink); }
+  .calc-assump ul { margin: 10px 0 0 18px; padding: 0; display: grid; gap: 4px; }
+  .calc-disclaimer { font-size: 13px; color: var(--muted); margin-top: 16px; max-width: 70ch; }
+
   /* briefing download card */
   .dl-card {
     margin-top: 44px; max-width: 620px;
@@ -438,6 +483,7 @@
       <a href="#mergers">Mergers</a>
       <a href="#record">Track Record</a>
       <a href="#playbook">The Playbook</a>
+      <a href="#calculator">Calculator</a>
       <a href="#worth">What's My Business Worth?</a>
       <a href="#contact">Contact</a>
     </div>
@@ -1026,6 +1072,74 @@
   </div>
 </section>
 
+<section id="calculator" class="hairline">
+  <div class="wrap">
+    <div class="eyebrow">Value calculator</div>
+    <h2>See your value the way five kinds of buyers see it</h2>
+    <p class="lede">Same company, five kinds of money, five different numbers. Enter your averages from the past three years and see what each buyer type could pay, how much arrives as cash at close, and what carrying a seller note does to the math. Everything runs right here in your browser; nothing you type is sent anywhere.</p>
+
+    <div class="calc-grid">
+      <div class="calc-panel">
+        <h3>Your numbers</h3>
+        <p class="calc-hint">Use the average of your past three years. Example numbers are loaded; replace them with yours.</p>
+        <div class="field">
+          <label for="c-rev">Gross revenue (annual)</label>
+          <input id="c-rev" type="text" inputmode="numeric" value="1,800,000">
+        </div>
+        <div class="field">
+          <label for="c-exp">Total expenses (annual)</label>
+          <input id="c-exp" type="text" inputmode="numeric" value="1,500,000">
+        </div>
+        <div class="field">
+          <label for="c-ni">Net income (auto-filled; edit if your tax return differs)</label>
+          <input id="c-ni" type="text" inputmode="numeric" value="300,000">
+        </div>
+        <div class="field">
+          <label for="c-sal">Your salary &amp; benefits (add-back)</label>
+          <input id="c-sal" type="text" inputmode="numeric" value="120,000">
+        </div>
+        <div class="field">
+          <label for="c-veh">Vehicle, cell phone &amp; personal run through the business</label>
+          <input id="c-veh" type="text" inputmode="numeric" value="18,000">
+        </div>
+        <div class="field">
+          <label for="c-oth">One-time or unusual expenses</label>
+          <input id="c-oth" type="text" inputmode="numeric" value="12,000">
+        </div>
+        <div class="calc-computed">
+          <div><span>Owner earnings (SDE)</span><span class="cval" id="c-sde-out">$0</span></div>
+          <div><span>Earnings after a hired manager</span><span class="cval" id="c-ebitda-out">$0</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="paths" id="c-paths"></div>
+        <div class="note-ctl" id="c-notectl">
+          <label for="c-note">Seller note: <span id="c-note-out">10</span>% of the price, carried by you</label>
+          <input id="c-note" type="range" min="0" max="25" step="5" value="10">
+        </div>
+        <div class="calc-out" id="c-out"></div>
+        <details class="calc-assump">
+          <summary>The assumptions behind these numbers</summary>
+          <ul>
+            <li>Owner earnings (SDE) = net income + your salary and benefits + personal and one-time add-backs, averaged over three years.</li>
+            <li>Institutional buyers value earnings after paying a manager to run the company; we assume a $90,000 manager salary.</li>
+            <li>SBA 7(a): 10% rate, 10-year term, 1.25x debt coverage, 10% buyer down payment. SBA rules also let a standby seller note count toward part of that down payment.</li>
+            <li>Conventional loan: 8.5% rate, 7-year term, 1.35x coverage, 25% down.</li>
+            <li>Maine trades and service companies typically trade at 2.4x to 3.2x owner earnings; family offices at 3.5x to 4.5x and private equity at 4.0x to 5.5x of earnings after a manager.</li>
+            <li>Seller-financed sales: 20% cash down, the rest carried by you at 8% over 7 years.</li>
+            <li>Every figure a buyer or lender uses will be verified against tax returns and bank statements. That is why preparation is the work.</li>
+          </ul>
+        </details>
+        <p class="calc-disclaimer">This is a planning estimate, not a valuation or an offer. Real numbers depend on provable books, customer mix, licenses, equipment, and terms. The free conversation gets you the real one.</p>
+        <div class="cta-row" style="margin-top:18px">
+          <a class="btn btn-primary" href="#worth">Get your real number</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="worth" class="hairline">
   <div class="wrap">
     <div class="eyebrow">What's my business worth?</div>
@@ -1116,6 +1230,183 @@
       + '?subject=' + encodeURIComponent('Confidential valuation conversation: ' + f.name.value)
       + '&body=' + encodeURIComponent(body);
   });
+
+  /* ===== value calculator ===== */
+  (function () {
+    var REPL = 90000; /* hired manager salary */
+    var money = function (n) { return '$' + Math.max(0, Math.round(n / 10000) * 10000).toLocaleString('en-US'); };
+    var moneyK = function (n) { return '$' + Math.max(0, Math.round(n / 1000) * 1000).toLocaleString('en-US'); };
+    var num = function (id) {
+      var v = document.getElementById(id).value.replace(/[^0-9.]/g, '');
+      return v ? parseFloat(v) : 0;
+    };
+    var annuity = function (rate, yrs) { var i = rate / 12, n = yrs * 12; return (1 - Math.pow(1 + i, -n)) / i; };
+    var loanMax = function (cfads, dscr, rate, yrs) {
+      return Math.max(0, (cfads / dscr / 12) * annuity(rate, yrs));
+    };
+
+    var niDirty = false;
+    var state = { path: 'sba' };
+
+    function bankPath(sde, f, cfg) {
+      var cfads = sde - REPL;
+      if (cfads <= 0) return { blocked: true };
+      var L = loanMax(cfads, cfg.dscr, cfg.rate, cfg.yrs);
+      var p0 = Math.min(cfg.multHigh * sde, L / (1 - cfg.down));
+      var pf = Math.min(cfg.multHigh * sde, L / Math.max(0.2, 1 - cfg.down - f));
+      var low = Math.min(cfg.multLow * sde, L / (1 - cfg.down));
+      var V = pf, note = f * V;
+      var buyerCash = Math.max(V * cfg.down, V - note - L);
+      var bank = V - note - buyerCash;
+      return { low: low, high: V, bank: bank, cash: buyerCash, note: note,
+               cashAtClose: V - note, uplift: pf - p0, p0: p0 };
+    }
+
+    function multPath(base, f, cfg) {
+      var mHigh = cfg.multHigh + f * 1.5;
+      return { low: cfg.multLow * base, high: mHigh * base };
+    }
+
+    var PATHS = [
+      { id: 'sba', label: 'SBA Lender', kind: 'bank',
+        cfg: { rate: 0.10, yrs: 10, dscr: 1.25, down: 0.10, multLow: 2.4, multHigh: 3.2 },
+        blurb: 'The most common buyer for Maine trades companies: an operator backed by an SBA 7(a) loan. The bank is the real counterparty. It lends what your provable cash flow can repay with room to spare, and the buyer adds at least 10% down.' },
+      { id: 'fo', label: 'Family Office', kind: 'mult', gate: 400000,
+        cfg: { multLow: 3.5, multHigh: 4.5 },
+        gateMsg: 'Most family offices want at least $400,000 of earnings after a manager. Below that, treat this path as directional.',
+        blurb: 'Patient private capital buying to hold. They value your earnings after paying a manager to run the company, and they verify everything before they pay for it.' },
+      { id: 'pe', label: 'Private Equity', kind: 'mult', gate: 750000,
+        cfg: { multLow: 4.0, multHigh: 5.5 },
+        gateMsg: 'Private equity platforms generally want $750,000 or more of earnings after a manager. Below that you are an add-on for an existing platform, usually priced below this range.',
+        blurb: 'Funds building platforms pay the strongest multiples, because your company is worth more inside a bigger one. The bar to qualify is higher, and so is the diligence.' },
+      { id: 'conv', label: 'Conventional Loan', kind: 'bank',
+        cfg: { rate: 0.085, yrs: 7, dscr: 1.35, down: 0.25, multLow: 2.2, multHigh: 2.9 },
+        blurb: 'A bank loan without the SBA guarantee: shorter term, more down, stricter coverage. It suits strong books and asset-heavy companies, and it prices accordingly.' },
+      { id: 'sf', label: 'Seller Financing', kind: 'sf',
+        cfg: { multLow: 2.6, multHigh: 3.3, down: 0.20, rate: 0.08, yrs: 7 },
+        blurb: 'You are the bank. The price is often the strongest and the buyer pool the widest, because financing friction disappears. The trade: most of your money arrives over years, and the note is only as good as the buyer you choose.' }
+    ];
+
+    function row(label, val) {
+      return '<div><span>' + label + '</span><span class="cval">' + val + '</span></div>';
+    }
+
+    function render() {
+      var rev = num('c-rev'), exp = num('c-exp');
+      if (!niDirty && (rev || exp)) {
+        document.getElementById('c-ni').value = Math.max(0, rev - exp).toLocaleString('en-US');
+      }
+      var ni = num('c-ni');
+      var sde = ni + num('c-sal') + num('c-veh') + num('c-oth');
+      var ebitda = Math.max(0, sde - REPL);
+      document.getElementById('c-sde-out').textContent = moneyK(sde);
+      document.getElementById('c-ebitda-out').textContent = moneyK(ebitda);
+
+      var f = num('c-note') / 100;
+      document.getElementById('c-note-out').textContent = Math.round(f * 100);
+      var P = PATHS.filter(function (p) { return p.id === state.path; })[0];
+      document.getElementById('c-notectl').style.display = (P.kind === 'sf') ? 'none' : '';
+
+      var out = document.getElementById('c-out');
+      if (sde <= 0) {
+        out.innerHTML = '<p class="calc-blurb">Enter your numbers on the left and your value appears here.</p>';
+        return;
+      }
+
+      var html = '<div class="calc-caption">' + P.label + ' &middot; estimated value range</div>';
+      var seg = null, rows = '', msg = '';
+
+      if (P.kind === 'bank') {
+        var r = bankPath(sde, f, P.cfg);
+        if (r.blocked) {
+          html += '<div class="calc-range">Not yet financeable</div>';
+          msg = 'At these numbers, average earnings do not yet cover a new owner’s salary plus a loan payment. That is exactly what preparation fixes. It is worth a conversation.';
+        } else {
+          html += '<div class="calc-range">' + money(r.low) + ' to ' + money(r.high) + '</div>';
+          seg = [['Bank loan', r.bank, 'sg-bank'], ['Buyer’s cash', r.cash, 'sg-cash'], ['Your note', r.note, 'sg-note']];
+          rows += row('Cash to you at close', money(r.cashAtClose));
+          if (f > 0) {
+            rows += row('Your note, paid over time with interest', money(r.note));
+            if (r.uplift > 5000) {
+              rows += row('Added price your note makes financeable', money(r.uplift));
+              msg = 'Lenders read your note as a vote of confidence. It shrinks what the buyer must borrow and bring, so the same cash flow supports a higher total price.';
+            } else {
+              msg = 'At your numbers the market multiple, not the bank, sets the ceiling, so the note does not raise the price here. It still widens the buyer pool, strengthens offers, and speeds the close.';
+            }
+          } else {
+            msg = 'Slide in a seller note above and watch what it does. Carrying part of the price is the single most common way owners get deals done at strong prices.';
+          }
+        }
+      } else if (P.kind === 'mult') {
+        var m = multPath(ebitda, f, P.cfg);
+        html += '<div class="calc-range">' + money(m.low) + ' to ' + money(m.high) + '</div>';
+        var V = m.high, note = f * V;
+        seg = [['Buyer’s capital', V - note, 'sg-bank'], ['Your note', note, 'sg-note']];
+        rows += row('Cash to you at close', money(V - note));
+        if (f > 0) {
+          rows += row('Your note or earnout, paid over time', money(note));
+          msg = 'With institutional buyers, a note or earnout bridges the gap between your price and their offer. It is why the top of this range stretches when you carry part of the deal.';
+        }
+        if (ebitda < P.gate) msg = P.gateMsg;
+      } else {
+        var lowV = P.cfg.multLow * sde, highV = P.cfg.multHigh * sde;
+        html += '<div class="calc-range">' + money(lowV) + ' to ' + money(highV) + '</div>';
+        var Vs = highV, noteS = Vs * (1 - P.cfg.down);
+        var pmt = noteS * ((P.cfg.rate / 12) / (1 - Math.pow(1 + P.cfg.rate / 12, -12 * P.cfg.yrs))) * 12;
+        seg = [['Cash at close', Vs * P.cfg.down, 'sg-cash'], ['Your note', noteS, 'sg-note']];
+        rows += row('Cash to you at close (20%)', money(Vs * P.cfg.down));
+        rows += row('Your note (80%), 8% over 7 years', money(noteS));
+        rows += row('What the note pays you, per year', moneyK(pmt));
+        msg = 'Seven years of payments at interest often add up to more than an all-cash price. The key is a buyer you believe in, and terms written like a bank would write them. That is our job.';
+      }
+
+      if (seg) {
+        var total = seg.reduce(function (a, s) { return a + s[1]; }, 0);
+        if (total > 0) {
+          html += '<div class="sbar">';
+          seg.forEach(function (s) {
+            if (s[1] > 0) html += '<div class="' + s[2] + '" style="width:' + (s[1] / total * 100) + '%"></div>';
+          });
+          html += '</div><div class="slegend">';
+          seg.forEach(function (s) {
+            if (s[1] > 0) html += '<span><i class="' + s[2] + '"></i>' + s[0] + ' ' + money(s[1]) + '</span>';
+          });
+          html += '</div>';
+        }
+      }
+      if (rows) html += '<div class="calc-rows">' + rows + '</div>';
+      if (msg) html += '<div class="calc-msg">' + msg + '</div>';
+      html += '<p class="calc-blurb">' + P.blurb + '</p>';
+      out.innerHTML = html;
+    }
+
+    var pathsEl = document.getElementById('c-paths');
+    PATHS.forEach(function (p) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'path-btn' + (p.id === state.path ? ' active' : '');
+      b.textContent = p.label;
+      b.addEventListener('click', function () {
+        state.path = p.id;
+        pathsEl.querySelectorAll('.path-btn').forEach(function (x) { x.classList.remove('active'); });
+        b.classList.add('active');
+        render();
+      });
+      pathsEl.appendChild(b);
+    });
+
+    ['c-rev', 'c-exp', 'c-ni', 'c-sal', 'c-veh', 'c-oth'].forEach(function (id) {
+      var el = document.getElementById(id);
+      el.addEventListener('input', function () {
+        if (id === 'c-ni') niDirty = true;
+        var digits = el.value.replace(/[^0-9]/g, '');
+        el.value = digits ? parseInt(digits, 10).toLocaleString('en-US') : '';
+        render();
+      });
+    });
+    document.getElementById('c-note').addEventListener('input', render);
+    render();
+  })();
 </script>
 </body>
 </html>
