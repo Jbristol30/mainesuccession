@@ -360,6 +360,21 @@
     margin-top: 4px; padding-top: 3px;
   }
 
+  /* briefing download card */
+  .dl-card {
+    margin-top: 44px; max-width: 620px;
+    border: 1px solid var(--line); background: var(--surface);
+    border-left: 4px solid var(--green);
+    padding: 26px 26px 24px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .dl-kicker {
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--green); font-weight: 700;
+  }
+  .dl-card h3 { margin: 4px 0 2px; }
+  .dl-card p { color: var(--muted); font-size: 15.5px; margin: 0 0 16px; }
+  .dl-card .btn { align-self: flex-start; }
+
   /* form */
   form { max-width: 560px; margin-top: 36px; display: grid; gap: 18px; }
   .field label { display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
@@ -1059,6 +1074,13 @@
       </div>
       <p class="form-note">Submitting opens an email to us with your answers; nothing is stored on this page.</p>
     </form>
+
+    <div class="dl-card">
+      <div class="dl-kicker">Free download &middot; PDF, 12 pages</div>
+      <h3>The Maine Owner's Briefing</h3>
+      <p>Prefer to read before you talk? Twelve pages on what your company is worth, why most Maine sales fall through, and how we make sure yours doesn't. Written for owners, not bankers. Hand it to your CPA or attorney; we wrote it for them too.</p>
+      <a class="btn btn-primary" href="https://mainesuccession.com/The-Maine-Owners-Briefing.pdf" download="The Maine Owner's Briefing.pdf">Download the briefing</a>
+    </div>
   </div>
 </section>
 
